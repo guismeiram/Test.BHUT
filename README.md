@@ -7,4 +7,4 @@ Para compilar o projeto é necesario ter java 11 instlado e configurado ambiente
 
 IDE utilizada: eclipse.
 
-Para ter o projeto vá em qualquer terminal é insira este comando https://github.com/guismeiram/Test.BHUT.git
+Para ter o projeto vá em qualquer terminal é insira este comando git clone https://github.com/guismeiram/Test.BHUT.git
