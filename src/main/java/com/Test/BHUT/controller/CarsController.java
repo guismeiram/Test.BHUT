@@ -15,7 +15,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,23 +34,24 @@ public class CarsController {
 	@Autowired
 	private CarsService carsService;
 	
-
+	private String url = "http://api-test.bhut.com.br:3000/api/cars";
+	
+	private RestTemplate restTemplate = new RestTemplate();
+	
 	@GetMapping("cars")
 	public ResponseEntity<List<Cars>> getCars() {
-		RestTemplate restTemplate = new RestTemplate();
-		Cars[] cars = restTemplate.getForObject("http://api-test.bhut.com.br:3000/api/cars", Cars[].class);
+		
+		Cars[] cars = restTemplate.getForObject(url, Cars[].class);
 		return new ResponseEntity<>(Arrays.asList(cars), HttpStatus.OK);
 	}
 	
 	
 	@RequestMapping(value = "/cars/create")
 	  public Cars createProduct(@RequestBody Cars cars) {
-		String url = "http://api-test.bhut.com.br:3000/api/cars";
 
 	    HttpHeaders httpHeaders = new HttpHeaders();
 	    httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 	    HttpEntity<Cars> entity = new HttpEntity<Cars>(cars,httpHeaders);
-	    RestTemplate restTemplate = new RestTemplate();
         
       return restTemplate.exchange(url, HttpMethod.POST, entity, new ParameterizedTypeReference<Cars>() {}).getBody();
   }
