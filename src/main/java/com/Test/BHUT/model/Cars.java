@@ -1,12 +1,6 @@
 package com.Test.BHUT.model;
 
-
-
-
-
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,8 +11,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 //@Entity
 //@javax.persistence.Table(name="TB_CARS")
 @Getter
@@ -26,25 +22,11 @@ import lombok.Setter;
 @Document(collection = "cars")
 public class Cars
 {	
-	
 	private String _id;
+	private String car_id;
 	private String title;
 	private String brand;
 	private String price;
 	private int age;
-	public String Hora;
-	public String data;
-	
-	public Cars(String title, String brand, String price, int age, String hora, String data) {
-		this.title = title;
-		this.brand = brand;
-		this.price = price;
-		this.age = age;
-		this.Hora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));;
-		this.data = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));;
-	}
-
-	
-	
-	
+	private List<Log> log_car;
 }
