@@ -1,8 +1,10 @@
 package com.Test.BHUT.model;
 
-import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,18 +17,30 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Entity
-//@javax.persistence.Table(name="TB_CARS")
 @Getter
 @Setter
 @Document(collection = "cars")
+@JsonIgnoreProperties(value = { "target" })
 public class Cars
 {	
+	@JsonProperty("_id")
 	private String _id;
-	private String car_id;
+	
+	@JsonProperty("title")
 	private String title;
+	@JsonProperty("brand")
 	private String brand;
+	@JsonProperty("price")
 	private String price;
+	@JsonProperty("age")
 	private int age;
-	private List<Log> log_car;
+	@JsonProperty("data_hora")
+	public String data_hora;
+	
+	
+	
+	
+	
+
+	
 }

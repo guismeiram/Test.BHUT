@@ -3,12 +3,13 @@ package com.Test.BHUT.controller;
 
 
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,8 +28,9 @@ import org.springframework.web.client.RestTemplate;
 
 
 import com.Test.BHUT.model.Cars;
-import com.Test.BHUT.model.Log;
 import com.Test.BHUT.service.CarsService;
+
+
 
 
 @RestController
@@ -59,11 +61,10 @@ public class CarsController {
 	    httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 	    HttpEntity<Cars> entity = new HttpEntity<Cars>(cars,httpHeaders);
         
-       cars = restTemplate.exchange(url, HttpMethod.POST, entity, new ParameterizedTypeReference<Cars>() {}).getBody();
-       
-       
-	   return ResponseEntity.ok(carsService.salvar(cars));
-
+        cars = restTemplate.exchange(url, HttpMethod.POST, entity, new ParameterizedTypeReference<Cars>() {}).getBody();
+        cars.data_hora =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        
+       return ResponseEntity.ok(carsService.salvar(cars));
   }
 	
 
